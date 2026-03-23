@@ -48,9 +48,6 @@ function showNotification(message, type) {
         border-radius: 10px;
         z-index: 1000;
         animation: slideIn 0.3s ease-out;
-        font-family: 'Inter', sans-serif;
-        font-weight: 500;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     `;
     
     document.body.appendChild(notification);
@@ -85,16 +82,53 @@ style.textContent = `
             opacity: 0;
         }
     }
+    
+    .notification {
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
 `;
 document.head.appendChild(style);
 
-// Control simple del navbar al hacer scroll (sin efectos extraños)
+// Scroll reveal animation
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observar elementos para animación al hacer scroll
+document.querySelectorAll('.ingrediente-card, .paso-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'all 0.6s ease-out';
+    observer.observe(el);
+});
+
+// Efecto parallax en el hero
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+});
+
+// Control del navbar al hacer scroll
 let lastScroll = 0;
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     const currentScroll = window.pageYOffset;
     
-    // Solo ocultar/mostrar navbar, sin efectos de parallax
     if (currentScroll > lastScroll && currentScroll > 100) {
         navbar.style.transform = 'translateY(-100%)';
     } else {
@@ -103,4 +137,15 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-console.log('🍔 Master Burger by Matias Villatoro - Página estática lista!');
+// Contador interactivo para ingredientes (opcional)
+const ingredientesCards = document.querySelectorAll('.ingrediente-card');
+ingredientesCards.forEach(card => {
+    card.addEventListener('click', () => {
+        card.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            card.style.transform = '';
+        }, 200);
+    });
+});
+
+console.log('🍔 Master Burger - ¡Lista para cocinar!');
