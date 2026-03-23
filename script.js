@@ -1,4 +1,4 @@
-// Smooth scrolling mejorado para los enlaces del navbar
+// Smooth scrolling para los enlaces del navbar
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -7,7 +7,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         if (target) {
             const navbarHeight = document.querySelector('.navbar').offsetHeight;
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 10;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
             
             window.scrollTo({
                 top: targetPosition,
@@ -94,18 +94,21 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Control simple del navbar al hacer scroll
+// Control del navbar al hacer scroll - SE OCULTA AL BAJAR Y APARECE AL SUBIR
 let lastScroll = 0;
+const navbar = document.querySelector('.navbar');
+
 window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
     const currentScroll = window.pageYOffset;
     
     if (currentScroll > lastScroll && currentScroll > 100) {
-        navbar.style.transform = 'translateY(-100%)';
+        // Scroll hacia abajo - ocultar navbar
+        navbar.classList.add('hide');
     } else {
-        navbar.style.transform = 'translateY(0)';
+        // Scroll hacia arriba - mostrar navbar
+        navbar.classList.remove('hide');
     }
     lastScroll = currentScroll;
 });
 
-console.log('🍔 Master Burger by Matias Villatoro - Página estática lista!');
+console.log('🍔 Master Burger by Matias Villatoro - Página lista!');
