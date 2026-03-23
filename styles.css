@@ -4,24 +4,34 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: #fff;
     overflow-x: hidden;
+    padding-top: 70px; /* ESPACIO FIJO PARA EL NAVBAR */
 }
 
-/* Navbar - ESTÁTICO */
+/* Navbar - FIJO PERO CON ESPACIO EN EL BODY */
 .navbar {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     background: rgba(26, 26, 46, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
     padding: 1rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: none;
+    transition: transform 0.3s ease;
+}
+
+.navbar.hide {
+    transform: translateY(-100%);
 }
 
 .nav-container {
@@ -68,13 +78,13 @@ body {
     color: #ff6b35;
 }
 
-/* Hero Section - ESTÁTICA, SIN PARALLAX */
+/* Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: calc(100vh - 70px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6rem 2rem 4rem 2rem;
+    padding: 2rem 2rem 4rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
     gap: 4rem;
@@ -162,7 +172,6 @@ body {
     text-align: center;
 }
 
-/* ÍCONO DE HAMBURGUESA - TAMAÑO GRANDE */
 .burger-illustration {
     font-size: 15rem;
     animation: float 3s ease-in-out infinite;
@@ -325,7 +334,7 @@ video {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Timeline Pasos - SIN ANIMACIONES DE ENTRADA */
+/* Timeline Pasos */
 .pasos-timeline {
     max-width: 800px;
     margin: 0 auto;
@@ -429,86 +438,17 @@ video {
     color: rgba(255, 255, 255, 0.5);
 }
 
-/* Responsive - Ajustes para móvil */
-@media (max-width: 768px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding-top: 8rem;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-buttons {
-        justify-content: center;
-    }
-    
-    /* Ícono hamburguesa en móvil - Tamaño grande pero proporcionado */
-    .burger-illustration {
-        font-size: 10rem;
-    }
-    
-    .nav-links {
-        display: none;
-    }
-    
-    .ingredientes-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .paso-item {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .section-header h2 {
-        font-size: 1.8rem;
-    }
-}
-
-/* Para pantallas muy pequeñas */
-@media (max-width: 480px) {
-    .burger-illustration {
-        font-size: 8rem;
-    }
-}
-/* Ajuste para que el navbar no tape el contenido al hacer scroll */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Scroll margin para todas las secciones */
-#home, #video, #ingredientes, #pasos {
-    scroll-margin-top: 80px;
-}
-
-/* Hero Section - Aumentado el padding superior */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8rem 2rem 4rem 2rem; /* Más espacio arriba */
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 4rem;
-    position: relative;
-    z-index: 1;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
+    body {
+        padding-top: 60px;
+    }
+    
     .hero {
         flex-direction: column;
         text-align: center;
-        padding: 10rem 2rem 4rem 2rem; /* Más espacio en móvil */
-    }
-    
-    #home, #video, #ingredientes, #pasos {
-        scroll-margin-top: 100px;
+        padding: 1rem 1.5rem 3rem 1.5rem;
+        min-height: auto;
     }
     
     .hero-title {
@@ -542,23 +482,22 @@ html {
         font-size: 1.8rem;
     }
     
-    /* Ajuste para que la primera sección no quede tapada */
-    section:first-of-type {
-        padding-top: 2rem;
+    .container {
+        padding: 2rem 1.5rem;
     }
 }
 
-/* Para pantallas muy pequeñas */
 @media (max-width: 480px) {
     .burger-illustration {
         font-size: 8rem;
     }
     
-    .hero {
-        padding: 12rem 1.5rem 3rem 1.5rem;
+    .hero-title {
+        font-size: 2rem;
     }
     
-    #home, #video, #ingredientes, #pasos {
-        scroll-margin-top: 120px;
+    .btn-primary, .btn-secondary {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
     }
 }
