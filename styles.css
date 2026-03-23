@@ -503,3 +503,15 @@ video {
         font-size: 0.9rem;
     }
 }
+/* Asegurar que el video ocupe todo el espacio */
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+/* Quitar el placeholder que ya no usamos */
+.video-placeholder {
+    display: none;
+}
