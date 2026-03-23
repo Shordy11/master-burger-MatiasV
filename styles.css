@@ -460,8 +460,9 @@ video {
         flex-wrap: wrap;
     }
     
+    /* ÍCONO GRANDE EN TABLET */
     .burger-illustration {
-        font-size: 10rem;
+        font-size: 15rem;  /* Cambiado de 10rem a 15rem */
     }
     
     .nav-links {
@@ -488,8 +489,9 @@ video {
 }
 
 @media (max-width: 480px) {
+    /* ÍCONO GRANDE EN MÓVIL */
     .burger-illustration {
-        font-size: 8rem;
+        font-size: 12rem;  /* Cambiado de 8rem a 12rem */
     }
     
     .hero-title {
